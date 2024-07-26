@@ -16,7 +16,7 @@ const download = () => {
     <FormIntro :step="3" />
     <div class="container py-14">
       <!-- header -->
-      <div class="flex items-center justify-between mb-8">
+      <div class="w-[900px] flex items-center justify-between mb-8 mx-auto">
         <h1 class="text-center text-3xl font-semibold">Your Resume</h1>
         <div class="flex">
           <router-link
