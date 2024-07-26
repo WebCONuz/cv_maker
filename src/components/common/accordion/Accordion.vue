@@ -1,7 +1,10 @@
 <script setup>
 import { ref } from "vue";
 
-const openAccordion = ref(false);
+const props = defineProps({
+  isOpen: Boolean,
+});
+const openAccordion = ref(props.isOpen || false);
 </script>
 
 <template>

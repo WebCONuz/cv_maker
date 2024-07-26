@@ -30,12 +30,13 @@
         >
           create cv
         </RouterLink>
-        <button
+        <router-link
+          to="contact"
           type="button"
-          class="py-4 text-sm font-bold w-[170px] bg-main-blue text-white uppercase rounded-md"
+          class="py-4 text-center text-sm font-bold w-[170px] bg-main-blue text-white uppercase rounded-md"
         >
           contact us
-        </button>
+        </router-link>
       </div>
     </div>
     <img src="/images/banners/intro.png" alt="intro-image" class="w-1/2" />

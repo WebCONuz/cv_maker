@@ -27,7 +27,7 @@ const postData = () => {
 </script>
 
 <template>
-  <FormIntro />
+  <FormIntro :step="1" />
   <div class="py-14">
     <div class="container">
       <div class="text-center font-bold text-3xl text-main-blue mb-4">

@@ -17,33 +17,33 @@
           class="uppercase font-semibold hover:text-main-blue duration-200 mr-8"
           >Home</router-link
         >
-        <router-link
+        <!-- <router-link
           to="/"
           class="uppercase font-semibold hover:text-main-blue duration-200 mr-8"
           >About us</router-link
-        >
+        > -->
         <router-link
-          to="/"
+          to="/templates"
           class="uppercase font-semibold hover:text-main-blue duration-200 mr-8"
           >Templates</router-link
         >
         <router-link
-          to="/"
+          to="/contact"
           class="uppercase font-semibold hover:text-main-blue duration-200 mr-5"
           >Contact</router-link
         >
         <button
           type="button"
-          class="py-2 text-xs font-semibold w-24 bg-main-blue text-white uppercase rounded mr-5"
+          class="py-2 text-xs font-semibold w-24 bg-main-blue text-white uppercase rounded"
         >
           log in
         </button>
-        <button
+        <!-- <button
           type="button"
-          class="py-2 text-xs font-semibold w-24 bg-main-blue text-white uppercase rounded"
+          class="py-2 text-xs font-semibold w-24 bg-main-blue text-white uppercase rounded ml-5"
         >
           signup
-        </button>
+        </button> -->
       </nav>
     </div>
   </header>

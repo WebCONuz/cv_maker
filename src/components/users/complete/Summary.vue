@@ -6,7 +6,7 @@ const data = ref("");
 </script>
 
 <template>
-  <Accordion class="mb-8">
+  <Accordion class="mb-8" :isOpen="true">
     <template #title>
       <div class="flex items-center">
         <i class="bx bxs-user-circle text-3xl text-gray-600 mr-3"></i>

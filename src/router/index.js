@@ -22,6 +22,21 @@ const router = createRouter({
           name: "user-data",
           component: () => import("../views/users/CompleteDataView.vue"),
         },
+        {
+          path: "make-cv",
+          name: "user-make-cv",
+          component: () => import("../views/users/MakeCvView.vue"),
+        },
+        {
+          path: "templates",
+          name: "user-templates",
+          component: () => import("../views/users/TemplatesView.vue"),
+        },
+        {
+          path: "contact",
+          name: "user-contact",
+          component: () => import("../views/users/TemplatesView.vue"),
+        },
       ],
     },
   ],
