@@ -2,7 +2,10 @@
 import { ref } from "vue";
 
 const props = defineProps({
-  isOpen: Boolean,
+  isOpen: {
+    type: Boolean,
+    default: false,
+  },
 });
 const openAccordion = ref(props.isOpen || false);
 </script>
