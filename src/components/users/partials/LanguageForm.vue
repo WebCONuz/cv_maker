@@ -51,7 +51,7 @@ const openLanguage = () => {
     </div>
 
     <!-- body -->
-    <div class="flex flex-wrap border-b overflow-hidden mb-3">
+    <div class="flex flex-wrap overflow-hidden mb-3">
       <div class="w-1/2 pr-2 mb-3">
         <label for="language" class="block mb-1">Language*</label>
         <input

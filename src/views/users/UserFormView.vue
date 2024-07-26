@@ -6,14 +6,15 @@ import FormIntro from "../../components/users/complete/Intro.vue";
 
 const router = useRouter();
 const userData = reactive({
-  firstname: "",
-  lastname: "",
-  phone: "",
-  email: "",
-  password: "",
-  city: "",
-  postcode: "",
-  address: "",
+  firstname: "Qamariddin",
+  lastname: "Karimberdiyev",
+  phone: "+998991001010",
+  email: "karimberdiyev10@gmail.com",
+  password: "123456",
+  repassword: "123456",
+  city: "Tashkent",
+  postcode: "AQ12456z",
+  address: "Tashkent city, Chilanzar district, Uzbekistan",
 });
 const userImg = ref(null);
 const getFile = (e) => {
@@ -98,6 +99,7 @@ const postData = () => {
               type="password"
               required
               class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
+              v-model="userData.repassword"
             />
           </div>
           <div class="w-1/2 pr-2 mb-4">
@@ -135,7 +137,6 @@ const postData = () => {
             <input
               id="avatar"
               type="file"
-              required
               class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
               @change="getFile"
             />

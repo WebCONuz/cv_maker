@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from "vue";
 import Accordion from "../../common/accordion/Accordion.vue";
-import QuillEditor from "../../common/ui/QuillEditor.vue";
 import LanguageForm from "../partials/LanguageForm.vue";
 
 const languageArray = ref([{ id: 1 }]);

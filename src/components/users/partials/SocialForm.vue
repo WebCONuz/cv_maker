@@ -6,24 +6,25 @@ const props = defineProps({
   delete: Function,
 });
 
-const skillData = reactive({
-  name: "",
-  type: "",
+const socialData = reactive({
+  title: "",
+  account_name: "",
+  link: "",
 });
 const openForm = ref(true);
-const saveSkill = () => {
-  console.log("Save Skill");
+const saveSocial = () => {
+  console.log("Save Social");
   openForm.value = false;
 };
 
-const openSkill = () => {
+const openSocial = () => {
   openForm.value = true;
 };
 </script>
 
 <template>
   <form
-    @submit.prevent="saveSkill"
+    @submit.prevent="saveSocial"
     class="block overflow-hidden duration-200 mb-3"
     :class="openForm ? 'max-h-[800px]' : 'max-h-[33.6px]'"
   >
@@ -36,7 +37,7 @@ const openSkill = () => {
         class="font-semibold"
         :class="!openForm ? 'text-green-500' : 'text-gray-600'"
       >
-        Skill #{{ props.num }}
+        Social #{{ props.num }}
       </p>
       <div v-if="!openForm" class="flex items-center">
         <i
@@ -44,7 +45,7 @@ const openSkill = () => {
           class="bx bx-x text-2xl text-gray-500 hover:text-black cursor-pointer duration-200"
         ></i>
         <i
-          @click="openSkill"
+          @click="openSocial"
           class="bx bxs-pencil ml-3 text-gray-500 hover:text-black cursor-pointer duration-200"
         ></i>
       </div>
@@ -53,27 +54,42 @@ const openSkill = () => {
     <!-- body -->
     <div class="flex flex-wrap overflow-hidden mb-3">
       <div class="w-1/2 pr-2 mb-3">
-        <label for="skill_name" class="block mb-1">Name*</label>
+        <label for="social_name" class="block mb-1">Social name*</label>
         <input
-          id="skill_name"
+          id="social_name"
           type="text"
           required
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="skillData.name"
+          v-model="socialData.title"
         />
       </div>
       <div class="w-1/2 pl-2 mb-3">
-        <label for="skill_type" class="block mb-1">Skill type*</label>
-        <select
-          id="skill_type"
+        <label for="social_account" class="block mb-1">Account name*</label>
+        <input
+          id="social_account"
+          type="text"
           required
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="skillData.type"
-        >
-          <option value="" selected hidden>Select type</option>
-          <option value="hard">Hard skill</option>
-          <option value="soft">Soft skill</option>
-        </select>
+          v-model="socialData.account_name"
+        />
+      </div>
+      <div class="w-1/2 pr-2 mb-3">
+        <label for="social_link" class="block mb-1">Social link*</label>
+        <input
+          id="social_link"
+          type="text"
+          required
+          class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
+          v-model="socialData.link"
+        />
+      </div>
+      <div class="w-1/2 pl-2 mb-3">
+        <label for="social_logo" class="block mb-1">Logo*</label>
+        <input
+          id="social_logo"
+          type="file"
+          class="w-full py-1 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
+        />
       </div>
     </div>
     <div class="flex justify-end">

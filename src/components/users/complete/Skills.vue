@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from "vue";
 import Accordion from "../../common/accordion/Accordion.vue";
-import QuillEditor from "../../common/ui/QuillEditor.vue";
 import SkillForm from "../partials/SkillForm.vue";
 
 const skillArray = ref([{ id: 1 }]);

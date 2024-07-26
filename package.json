@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vueup/vue-quill": "^1.2.0",
+    "jspdf": "^2.5.1",
     "pinia": "^2.1.7",
     "quill-blot-formatter": "^1.0.5",
     "swiper": "^11.1.5",

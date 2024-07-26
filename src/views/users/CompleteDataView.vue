@@ -1,11 +1,12 @@
 <script setup>
+import { useRouter } from "vue-router";
 import FormIntro from "../../components/users/complete/Intro.vue";
 import Summary from "../../components/users/complete/Summary.vue";
 import Education from "../../components/users/complete/Education.vue";
 import Experience from "../../components/users/complete/Experience.vue";
 import Skills from "../../components/users/complete/Skills.vue";
 import Language from "../../components/users/complete/Language.vue";
-import { useRouter } from "vue-router";
+import Social from "../../components/users/complete/Social.vue";
 
 const router = useRouter();
 const nextStep = () => {
@@ -20,6 +21,7 @@ const nextStep = () => {
       <h1 class="text-center text-3xl font-semibold mb-8">Enter your data</h1>
 
       <Summary />
+      <Social />
       <Education />
       <Experience />
       <Skills />
