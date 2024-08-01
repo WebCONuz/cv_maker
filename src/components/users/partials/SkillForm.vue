@@ -1,18 +1,21 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { ref, computed } from "vue";
 
 const props = defineProps({
   num: Number,
   delete: Function,
 });
 
-const skillData = reactive({
-  name: "",
-  type: "",
+const formSchema = computed(() => {
+  return {
+    name: "required|min:3",
+    type: "required|one_of:hard,soft",
+  };
 });
+
 const openForm = ref(true);
-const saveSkill = () => {
-  console.log("Save Skill");
+const saveSkill = (value) => {
+  console.log(value);
   openForm.value = false;
 };
 
@@ -22,8 +25,9 @@ const openSkill = () => {
 </script>
 
 <template>
-  <form
-    @submit.prevent="saveSkill"
+  <vee-form
+    @submit="saveSkill"
+    :validation-schema="formSchema"
     class="block overflow-hidden duration-200 mb-3"
     :class="openForm ? 'max-h-[800px]' : 'max-h-[33.6px]'"
   >
@@ -54,26 +58,27 @@ const openSkill = () => {
     <div class="flex flex-wrap overflow-hidden mb-3">
       <div class="w-1/2 pr-2 mb-3">
         <label for="skill_name" class="block mb-1">Name*</label>
-        <input
+        <vee-field
           id="skill_name"
+          name="name"
           type="text"
-          required
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="skillData.name"
         />
+        <vee-error name="name" class="text-red-500 text-sm" />
       </div>
       <div class="w-1/2 pl-2 mb-3">
         <label for="skill_type" class="block mb-1">Skill type*</label>
-        <select
+        <vee-field
+          as="select"
           id="skill_type"
-          required
+          name="type"
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="skillData.type"
         >
           <option value="" selected hidden>Select type</option>
           <option value="hard">Hard skill</option>
           <option value="soft">Soft skill</option>
-        </select>
+        </vee-field>
+        <vee-error name="type" class="text-red-500 text-sm" />
       </div>
     </div>
     <div class="flex justify-end">
@@ -93,7 +98,7 @@ const openSkill = () => {
         <span>Save</span>
       </button>
     </div>
-  </form>
+  </vee-form>
 </template>
 
 <style scoped></style>

@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { ref, computed } from "vue";
 import QuillEditor from "../../common/ui/QuillEditor.vue";
 
 const props = defineProps({
@@ -7,17 +7,21 @@ const props = defineProps({
   delete: Function,
 });
 
-const educationData = reactive({
-  title: "",
-  start_time: "",
-  end_time: "",
-  position: "",
-  faculty: "",
-  description: "",
+const formSchema = computed(() => {
+  return {
+    title: "required|min:3",
+    start_time: "required",
+    end_time: "required",
+    position: "required",
+    faculty: "required",
+    logo: "required|image",
+  };
 });
+const description = ref("");
+
 const openForm = ref(true);
-const saveEducation = () => {
-  console.log("Save Education");
+const saveEducation = (value) => {
+  console.log(value);
   openForm.value = false;
 };
 
@@ -27,8 +31,9 @@ const openEducation = () => {
 </script>
 
 <template>
-  <form
-    @submit.prevent="saveEducation"
+  <vee-form
+    @submit="saveEducation"
+    :validation-schema="formSchema"
     class="block overflow-hidden duration-200 mb-3"
     :class="openForm ? 'max-h-[800px]' : 'max-h-[33.6px]'"
   >
@@ -59,67 +64,70 @@ const openEducation = () => {
     <div class="flex flex-wrap border-b overflow-hidden mb-3">
       <div class="w-1/2 pr-2 mb-3">
         <label for="edu-title" class="block mb-1">Title*</label>
-        <input
+        <vee-field
           id="edu-title"
+          name="title"
           type="text"
-          required
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="educationData.title"
         />
+        <vee-error name="title" class="text-red-500 text-sm" />
       </div>
       <div class="w-1/2 pl-2 mb-3">
         <label for="edu-faculty" class="block mb-1">Faculty*</label>
-        <input
+        <vee-field
           id="edu-faculty"
+          name="faculty"
           type="text"
-          required
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="educationData.faculty"
         />
+        <vee-error name="faculty" class="text-red-500 text-sm" />
       </div>
       <div class="w-1/2 pr-2 mb-3">
         <label for="edu-logo" class="block mb-1">Logo*</label>
-        <input
+        <vee-field
           id="edu-logo"
+          name="logo"
           type="file"
           class="w-full py-1 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
         />
+        <vee-error name="logo" class="text-red-500 text-sm" />
       </div>
       <div class="w-1/2 pl-2 mb-3">
         <label for="edu-position" class="block mb-1">Position*</label>
-        <input
+        <vee-field
           id="edu-position"
+          name="position"
           type="text"
-          required
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="educationData.position"
         />
+        <vee-error name="position" class="text-red-500 text-sm" />
       </div>
       <div class="w-1/2 pr-2 mb-3">
         <label for="edu-start-time" class="block mb-1">Start time*</label>
-        <input
+        <vee-field
           id="edu-start-time"
+          name="start_time"
           type="date"
-          required
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="educationData.start_time"
         />
+        <vee-error name="start_time" class="text-red-500 text-sm" />
       </div>
       <div class="w-1/2 pl-2 mb-3">
         <label for="edu-end-time" class="block mb-1">End time*</label>
-        <input
+        <vee-field
           id="edu-end-time"
+          name="end_time"
           type="date"
-          required
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="educationData.end_time"
         />
+        <vee-error name="end_time" class="text-red-500 text-sm" />
       </div>
       <div class="w-full block mb-3">
         <p class="mb-1">Description</p>
         <QuillEditor
           placeholder="Enter your summary"
-          :modelValue="educationData.description"
+          :modelValue="description"
+          name="description"
         />
       </div>
     </div>
@@ -140,7 +148,7 @@ const openEducation = () => {
         <span>Save</span>
       </button>
     </div>
-  </form>
+  </vee-form>
 </template>
 
 <style scoped></style>

@@ -1,19 +1,23 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { ref, computed } from "vue";
 
 const props = defineProps({
   num: Number,
   delete: Function,
 });
 
-const socialData = reactive({
-  title: "",
-  account_name: "",
-  link: "",
+const formSchema = computed(() => {
+  return {
+    title: "required|min:3",
+    account_name: "required|min:3",
+    link: "required|url",
+    logo: "required|image",
+  };
 });
+
 const openForm = ref(true);
-const saveSocial = () => {
-  console.log("Save Social");
+const saveSocial = (value) => {
+  console.log(value);
   openForm.value = false;
 };
 
@@ -23,8 +27,9 @@ const openSocial = () => {
 </script>
 
 <template>
-  <form
-    @submit.prevent="saveSocial"
+  <vee-form
+    @submit="saveSocial"
+    :validation-schema="formSchema"
     class="block overflow-hidden duration-200 mb-3"
     :class="openForm ? 'max-h-[800px]' : 'max-h-[33.6px]'"
   >
@@ -55,41 +60,43 @@ const openSocial = () => {
     <div class="flex flex-wrap overflow-hidden mb-3">
       <div class="w-1/2 pr-2 mb-3">
         <label for="social_name" class="block mb-1">Social name*</label>
-        <input
+        <vee-field
           id="social_name"
+          name="title"
           type="text"
-          required
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="socialData.title"
         />
+        <vee-error name="title" class="text-red-500 text-sm" />
       </div>
       <div class="w-1/2 pl-2 mb-3">
         <label for="social_account" class="block mb-1">Account name*</label>
-        <input
+        <vee-field
           id="social_account"
+          name="account_name"
           type="text"
-          required
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="socialData.account_name"
         />
+        <vee-error name="account_name" class="text-red-500 text-sm" />
       </div>
       <div class="w-1/2 pr-2 mb-3">
         <label for="social_link" class="block mb-1">Social link*</label>
-        <input
+        <vee-field
           id="social_link"
+          name="link"
           type="text"
-          required
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="socialData.link"
         />
+        <vee-error name="link" class="text-red-500 text-sm" />
       </div>
       <div class="w-1/2 pl-2 mb-3">
         <label for="social_logo" class="block mb-1">Logo*</label>
-        <input
+        <vee-field
           id="social_logo"
+          name="logo"
           type="file"
           class="w-full py-1 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
         />
+        <vee-error name="logo" class="text-red-500 text-sm" />
       </div>
     </div>
     <div class="flex justify-end">
@@ -109,7 +116,7 @@ const openSocial = () => {
         <span>Save</span>
       </button>
     </div>
-  </form>
+  </vee-form>
 </template>
 
 <style scoped></style>

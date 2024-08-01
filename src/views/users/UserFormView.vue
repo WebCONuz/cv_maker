@@ -1,28 +1,26 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { computed } from "vue";
 import { useRouter } from "vue-router";
-import Input from "../../components/common/form/Input.vue";
 import FormIntro from "../../components/users/complete/Intro.vue";
 
 const router = useRouter();
-const userData = reactive({
-  firstname: "Qamariddin",
-  lastname: "Karimberdiyev",
-  phone: "+998991001010",
-  email: "karimberdiyev10@gmail.com",
-  password: "123456",
-  repassword: "123456",
-  city: "Tashkent",
-  postcode: "AQ12456z",
-  address: "Tashkent city, Chilanzar district, Uzbekistan",
+const formSchema = computed(() => {
+  return {
+    firstname: "required|min:3",
+    lastname: "required|min:3",
+    phone: "required|digits:9",
+    email: "email",
+    password: "required|min:6",
+    repassword: "confirmed:@password",
+    city: "required",
+    postcode: "required",
+    address: "required",
+    avatar: "required|image",
+  };
 });
-const userImg = ref(null);
-const getFile = (e) => {
-  userImg.value = e.target.files[0];
-};
 
-const postData = () => {
-  console.log(userData, userImg.value);
+const postData = (value) => {
+  console.log(value);
   router.push({ name: "user-data" });
 };
 </script>
@@ -34,112 +32,117 @@ const postData = () => {
       <div class="text-center font-bold text-3xl text-main-blue mb-4">
         Personal Details
       </div>
-      <form @submit.prevent="postData" class="block">
+      <vee-form
+        @submit="postData"
+        :validation-schema="formSchema"
+        class="block"
+      >
         <div
-          class="w-[60%] flex flex-wrap mx-auto border shadow-xl pt-4 pb-6 px-6 rounded-lg"
+          class="w-[660px] flex flex-wrap mx-auto border shadow-xl pt-4 pb-6 px-6 rounded-lg"
         >
           <div class="w-1/2 pr-2 mb-4">
-            <label for="fistname" class="block mb-1">First name*</label>
-            <input
-              id="fistname"
+            <label for="firstname" class="block mb-1">First name*</label>
+            <vee-field
+              id="firstname"
+              name="firstname"
               type="text"
               placeholder="John"
-              required
               class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-              v-model="userData.firstname"
             />
+            <vee-error name="firstname" class="text-red-500 text-sm" />
           </div>
           <div class="w-1/2 pl-2 mb-4">
             <label for="lastname" class="block mb-1">Last name*</label>
-            <input
+            <vee-field
               id="lastname"
+              name="lastname"
               type="text"
               placeholder="Doe"
-              required
               class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-              v-model="userData.lastname"
             />
+            <vee-error name="lastname" class="text-red-500 text-sm" />
           </div>
           <div class="w-1/2 pr-2 mb-4">
             <label for="phone" class="block mb-1">Phone*</label>
-            <input
+            <vee-field
               id="phone"
+              name="phone"
               yype="text"
               placeholder="+99 899 100 00 01"
-              required
               class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-              v-model="userData.phone"
             />
+            <vee-error name="phone" class="text-red-500 text-sm" />
           </div>
           <div class="w-1/2 pl-2 mb-4">
             <label for="email" class="block mb-1">Email*</label>
-            <input
+            <vee-field
               id="email"
-              tabindex="email"
+              name="email"
+              type="email"
               placeholder="example@gmail.com"
-              required
               class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-              v-model="userData.email"
             />
+            <vee-error name="email" class="text-red-500 text-sm" />
           </div>
           <div class="w-1/2 pr-2 mb-4">
             <label for="password" class="block mb-1">Password*</label>
-            <input
+            <vee-field
               id="password"
+              name="password"
               type="password"
-              required
               class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-              v-model="userData.password"
             />
+            <vee-error name="password" class="text-red-500 text-sm" />
           </div>
           <div class="w-1/2 pl-2 mb-4">
-            <label for="re-password" class="block mb-1">Re-password*</label>
-            <input
-              id="re-password"
+            <label for="repassword" class="block mb-1">Re-password*</label>
+            <vee-field
+              id="repassword"
+              name="repassword"
               type="password"
-              required
               class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-              v-model="userData.repassword"
             />
+            <vee-error name="repassword" class="text-red-500 text-sm" />
           </div>
           <div class="w-1/2 pr-2 mb-4">
             <label for="city" class="block mb-1">City/Town*</label>
-            <input
+            <vee-field
               id="city"
+              name="city"
               type="text"
-              required
               class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-              v-model="userData.city"
             />
+            <vee-error name="city" class="text-red-500 text-sm" />
           </div>
           <div class="w-1/2 pl-2 mb-4">
             <label for="postcode" class="block mb-1">Post code*</label>
-            <input
+            <vee-field
               id="postcode"
+              name="postcode"
               type="text"
-              required
               class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-              v-model="userData.postcode"
             />
+            <vee-error name="postcode" class="text-red-500 text-sm" />
           </div>
           <div class="w-1/2 pr-2">
             <label for="address" class="block mb-1">Address*</label>
-            <input
+            <vee-field
               id="address"
+              name="address"
               type="text"
-              required
               class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-              v-model="userData.address"
             />
+            <vee-error name="address" class="text-red-500 text-sm" />
           </div>
           <div class="w-1/2 pl-2">
             <label for="avatar" class="block mb-1">User image*</label>
-            <input
+            <vee-field
               id="avatar"
+              name="avatar"
               type="file"
               class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-              @change="getFile"
             />
+            <vee-error name="avatar" class="text-red-500 text-sm" />
           </div>
         </div>
         <div class="text-center mt-8">
@@ -150,7 +153,7 @@ const postData = () => {
             Next Step
           </button>
         </div>
-      </form>
+      </vee-form>
     </div>
   </div>
 </template>

@@ -1,18 +1,22 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { ref, computed } from "vue";
 
 const props = defineProps({
   num: Number,
   delete: Function,
 });
 
-const languageData = reactive({
-  language: "",
-  degree: "",
+const formSchema = computed(() => {
+  return {
+    language: "required|min:3",
+    degree:
+      "required|one_of:elementary,pre-intermediate,intermediate,expert,native",
+  };
 });
+
 const openForm = ref(true);
-const saveLanguage = () => {
-  console.log("Save Language");
+const saveLanguage = (value) => {
+  console.log(value);
   openForm.value = false;
 };
 
@@ -22,8 +26,9 @@ const openLanguage = () => {
 </script>
 
 <template>
-  <form
-    @submit.prevent="saveLanguage"
+  <vee-form
+    @submit="saveLanguage"
+    :validation-schema="formSchema"
     class="block overflow-hidden duration-200 mb-3"
     :class="openForm ? 'max-h-[800px]' : 'max-h-[33.6px]'"
   >
@@ -54,29 +59,30 @@ const openLanguage = () => {
     <div class="flex flex-wrap overflow-hidden mb-3">
       <div class="w-1/2 pr-2 mb-3">
         <label for="language" class="block mb-1">Language*</label>
-        <input
+        <vee-field
           id="language"
+          name="language"
           type="text"
-          required
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="languageData.language"
         />
+        <vee-error name="language" class="text-red-500 text-sm" />
       </div>
       <div class="w-1/2 pl-2 mb-3">
         <label for="level" class="block mb-1">Level*</label>
-        <select
+        <vee-field
+          as="select"
           id="level"
-          required
+          name="degree"
           class="w-full py-2 px-4 outline-none border border-gray-300 focus:border-main-blue rounded-md"
-          v-model="languageData.degree"
         >
           <option value="" selected hidden>Select level</option>
-          <option value="elementatry">Elementary</option>
+          <option value="elementary">Elementary</option>
           <option value="pre-intermediate">Pre-intermediate</option>
           <option value="intermediate">Intermediate</option>
           <option value="expert">Expert</option>
           <option value="native">Native</option>
-        </select>
+        </vee-field>
+        <vee-error name="degree" class="text-red-500 text-sm" />
       </div>
     </div>
     <div class="flex justify-end">
@@ -96,7 +102,7 @@ const openLanguage = () => {
         <span>Save</span>
       </button>
     </div>
-  </form>
+  </vee-form>
 </template>
 
 <style scoped></style>
