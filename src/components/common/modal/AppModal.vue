@@ -16,7 +16,7 @@ const props = defineProps({
     :style="'max-width:' + props.width"
   >
     <AppTransition>
-      <div v-if="modelValue" class="app-modal__body rounded-2xl">
+      <div v-if="modelValue" class="app-modal__body rounded-lg">
         <slot></slot>
       </div>
     </AppTransition>
@@ -49,11 +49,11 @@ const props = defineProps({
   display: none;
 }
 .app-modal__body {
-  padding: 26px 31px 35px 32px;
+  padding: 20px;
   background-color: #fff;
 }
 .app-modal-shadow {
-  background-color: rgba(0, 153, 181, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
   left: 0;
   top: 0;
@@ -63,7 +63,7 @@ const props = defineProps({
 }
 @media screen and (max-width: 640px) {
   .app-modal__body {
-    padding: 18px 21px 25px 21px;
+    padding: 15px;
   }
 }
 </style>

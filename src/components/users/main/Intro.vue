@@ -1,6 +1,23 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import LoginModal from "../modal/LoginModal.vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const openModal = ref(null);
+const access_token = ref(null);
+
+function openSignModal() {
+  access_token.value = localStorage.getItem("access_token");
+  if (access_token.value) {
+    router.push({ name: "user-complete-user" });
+  } else {
+    openModal.value.openModal();
+  }
+}
+</script>
 
 <template>
+  <LoginModal ref="openModal" />
   <section class="container flex items-center py-20">
     <div class="w-1/2 pr-14">
       <span
@@ -24,12 +41,13 @@
         perfect job-ready resume.
       </p>
       <div class="flex">
-        <RouterLink
-          to="/complete-user"
+        <button
+          type="button"
+          @click="openSignModal"
           class="py-4 text-sm font-bold w-[170px] bg-main-blue text-white text-center uppercase rounded-md mr-5"
         >
           create cv
-        </RouterLink>
+        </button>
         <router-link
           to="contact"
           type="button"

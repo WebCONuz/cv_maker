@@ -1,6 +1,27 @@
-<script setup></script>
+<script setup>
+import { ref, onMounted } from "vue";
+import LoginModal from "../modal/LoginModal.vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const openModal = ref(null);
+
+function openSignModal() {
+  openModal.value.openModal();
+}
+
+const logout = () => {
+  localStorage.removeItem("access_token");
+  router.go(0);
+};
+
+const access_token = ref(null);
+onMounted(() => {
+  access_token.value = localStorage.getItem("access_token");
+});
+</script>
 
 <template>
+  <LoginModal ref="openModal" />
   <header class="w-full py-3 bg-white sticky top-0 left-0 z-20 shadow-md">
     <div class="container flex items-center justify-between">
       <router-link to="/" class="flex items-center">
@@ -33,17 +54,31 @@
           >Contact</router-link
         >
         <button
+          v-if="!access_token"
           type="button"
           class="py-2 text-xs font-semibold w-24 bg-main-blue text-white uppercase rounded"
+          @click="openSignModal"
         >
           log in
         </button>
-        <!-- <button
-          type="button"
-          class="py-2 text-xs font-semibold w-24 bg-main-blue text-white uppercase rounded ml-5"
+        <div
+          v-else
+          class="relative w-9 h-9 rounded-md bg-gray-200 flex items-center justify-center group"
         >
-          signup
-        </button> -->
+          <i class="bx bxs-user text-2xl text-gray-400"></i>
+          <div
+            class="w-24 absolute top-[43px] right-0 rounded-md bg-white shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:top-[38px] duration-200"
+          >
+            <button
+              @click="logout"
+              type="button"
+              class="py-1 w-full border border-gray-200 bg-white text-gray-400 rounded flex items-center justify-center hover:bg-gray-100 hover:text-gray-600 duration-200"
+            >
+              <i class="bx bx-log-out text-lg"></i>
+              <span class="text-sm ml-1 mb-[2px]">Log out</span>
+            </button>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
