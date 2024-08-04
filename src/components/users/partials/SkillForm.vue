@@ -4,6 +4,7 @@ import { ref, computed } from "vue";
 const props = defineProps({
   num: Number,
   delete: Function,
+  showBtn: Function,
 });
 
 const formSchema = computed(() => {
@@ -17,6 +18,7 @@ const openForm = ref(true);
 const saveSkill = (value) => {
   console.log(value);
   openForm.value = false;
+  props.showBtn(true);
 };
 
 const openSkill = () => {

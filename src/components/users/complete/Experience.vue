@@ -2,7 +2,9 @@
 import { ref } from "vue";
 import Accordion from "../../common/accordion/Accordion.vue";
 import ExperienceForm from "../partials/ExperienceForm.vue";
+import ShowCvModal from "../modal/ShowCvModal.vue";
 
+const isSave = ref(false);
 const experienceArray = ref([{ id: 1 }]);
 const addExperience = () => {
   if (experienceArray.value?.length > 0) {
@@ -16,10 +18,27 @@ const addExperience = () => {
 const deleteExperience = (num) => {
   const index = experienceArray.value?.findIndex((i) => i.id == num);
   experienceArray.value?.splice(index, 1);
+  if (experienceArray.value?.length === 0) {
+    isSave.value = false;
+  }
+};
+
+const openModal = ref(null);
+const openCV = () => {
+  openModal.value.openModal();
+};
+
+const showBtn = (val) => {
+  if (val) {
+    isSave.value = true;
+  } else {
+    isSave.value = false;
+  }
 };
 </script>
 
 <template>
+  <ShowCvModal ref="openModal" />
   <Accordion class="mb-8">
     <template #title>
       <div class="flex items-center">
@@ -33,6 +52,7 @@ const deleteExperience = (num) => {
         :key="item"
         :num="item.id"
         :delete="deleteExperience"
+        :showBtn="showBtn"
       />
       <button
         @click="addExperience"
@@ -40,6 +60,14 @@ const deleteExperience = (num) => {
       >
         <i class="bx bx-plus-circle text-lg text-gray-700 mr-1"></i>
         <span>Add another work experience</span>
+      </button>
+      <button
+        v-if="isSave"
+        @click="openCV"
+        class="cursor-pointer w-full rounded bg-main-blue text-white py-2 flex items-center justify-center mt-2"
+      >
+        <i class="bx bx-file text-lg mr-1"></i>
+        <span>Show CV</span>
       </button>
     </template>
   </Accordion>

@@ -45,47 +45,57 @@ const download = () => {
 
           <!-- socials -->
           <div class="grid grid-cols-2 mb-4">
-            <ul>
-              <li class="flex">
-                <b class="mr-2">Email:</b>
-                <router-link to="https://kun.uz" class="text-gray-500">
-                  muxammadi0799@gmail.com
-                </router-link>
-              </li>
-              <li class="flex">
-                <b class="mr-2">Phone:</b>
-                <router-link to="https://kun.uz" class="text-gray-500">
-                  +998995426307
-                </router-link>
-              </li>
-              <li class="flex">
-                <b class="mr-2">Location:</b>
-                <router-link to="https://kun.uz" class="text-gray-500">
-                  Tashkent, Uzbekistan
-                </router-link>
-              </li>
-            </ul>
-            <ul>
-              <li class="flex">
-                <b class="mr-2">LinkedIn:</b>
-                <router-link to="https://kun.uz" class="text-gray-500">
-                  muxammadi_toshtemirov
-                </router-link>
-              </li>
-              <li class="flex">
-                <b class="mr-2">Telegram:</b>
-                <router-link to="https://kun.uz" class="text-gray-500">
-                  Muxammadi_Toshtemirov
-                </router-link>
-              </li>
-              <li class="flex">
-                <b class="mr-2">Github:</b>
-                <router-link to="https://kun.uz" class="text-gray-500">
-                  github.com/WebCONuz
-                </router-link>
-              </li>
-            </ul>
+            <div class="flex">
+              <b class="mr-2">Email:</b>
+              <router-link to="https://kun.uz" class="text-gray-500">
+                muxammadi0799@gmail.com
+              </router-link>
+            </div>
+            <div class="flex">
+              <b class="mr-2">Phone:</b>
+              <router-link to="https://kun.uz" class="text-gray-500">
+                +998995426307
+              </router-link>
+            </div>
+            <div class="flex">
+              <b class="mr-2">Location:</b>
+              <router-link to="https://kun.uz" class="text-gray-500">
+                Tashkent, Uzbekistan
+              </router-link>
+            </div>
+            <div class="flex">
+              <b class="mr-2">LinkedIn:</b>
+              <router-link to="https://kun.uz" class="text-gray-500">
+                muxammadi_toshtemirov
+              </router-link>
+            </div>
+            <div class="flex">
+              <b class="mr-2">Telegram:</b>
+              <router-link to="https://kun.uz" class="text-gray-500">
+                Muxammadi_Toshtemirov
+              </router-link>
+            </div>
+            <div class="flex">
+              <b class="mr-2">Github:</b>
+              <router-link to="https://kun.uz" class="text-gray-500">
+                github.com/WebCONuz
+              </router-link>
+            </div>
           </div>
+
+          <!-- summary -->
+          <h3 class="text-lg mb-2">
+            <b>SUMMARY</b>
+          </h3>
+          <p class="mb-4 text-gray-600">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
+            nisi quia hic quo illo et totam velit iure neque modi praesentium
+            asperiores quos, odio sapiente nostrum repellendus alias at
+            doloribus officiis aperiam rerum dolore omnis. Non voluptas
+            architecto dolore explicabo. odio sapiente nostrum repellendus alias
+            at doloribus officiis aperiam rerum dolore omnis. Non voluptas
+            architecto dolore explicabo.
+          </p>
 
           <!-- experience -->
           <h3 class="text-lg mb-2">

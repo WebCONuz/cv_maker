@@ -2,7 +2,9 @@
 import { ref } from "vue";
 import Accordion from "../../common/accordion/Accordion.vue";
 import SocialForm from "../partials/SocialForm.vue";
+import ShowCvModal from "../modal/ShowCvModal.vue";
 
+const isSave = ref(false);
 const socialArray = ref([{ id: 1 }]);
 const addSocial = () => {
   if (socialArray.value?.length > 0) {
@@ -16,10 +18,27 @@ const addSocial = () => {
 const deleteSocial = (num) => {
   const index = socialArray.value?.findIndex((i) => i.id == num);
   socialArray.value?.splice(index, 1);
+  if (socialArray.value?.length === 0) {
+    isSave.value = false;
+  }
+};
+
+const openModal = ref(null);
+const openCV = () => {
+  openModal.value.openModal();
+};
+
+const showBtn = (val) => {
+  if (val) {
+    isSave.value = true;
+  } else {
+    isSave.value = false;
+  }
 };
 </script>
 
 <template>
+  <ShowCvModal ref="openModal" />
   <Accordion class="mb-8">
     <template #title>
       <div class="flex items-center">
@@ -33,6 +52,7 @@ const deleteSocial = (num) => {
         :key="item"
         :num="item.id"
         :delete="deleteSocial"
+        :showBtn="showBtn"
       />
       <button
         @click="addSocial"
@@ -40,6 +60,14 @@ const deleteSocial = (num) => {
       >
         <i class="bx bx-plus-circle text-lg text-gray-700 mr-1"></i>
         <span>Add another social</span>
+      </button>
+      <button
+        v-if="isSave"
+        @click="openCV"
+        class="cursor-pointer w-full rounded bg-main-blue text-white py-2 flex items-center justify-center mt-2"
+      >
+        <i class="bx bx-file text-lg mr-1"></i>
+        <span>Show CV</span>
       </button>
     </template>
   </Accordion>
